@@ -2,8 +2,8 @@ import boto3
 from boto3.dynamodb.conditions import Key, Attr
 
 dynamodb = boto3.resource('dynamodb')
-workoutsTbl = dynamodb.Table('runnerTry')
-kpis = dynamodb.Table('runnerTry')
+workoutsTbl = dynamodb.Table('workouts')
+kpis = dynamodb.Table('metrics')
 
 
 def getUserWorkouts(userID, activityType = 'allTypes'):

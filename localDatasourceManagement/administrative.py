@@ -7,7 +7,7 @@ def createPutRequestFiles(dataDirectory, tableName):
     fileTracker = 1
     editedJSON = []
     fullJSON = {tableName:[]}
-    finalJSONFile = open(str(tableName) + ".json", "w+")
+    finalJSONFile = open(str(tableName) + '.json', 'w+')
 
     for fn in os.listdir(dataDirectory):
         if i <= 25:
@@ -16,9 +16,9 @@ def createPutRequestFiles(dataDirectory, tableName):
             editedJSON.append(item)
             i = i + 1
         else:
-            fullJSON["runnerTry"] = editedJSON
+            fullJSON[tableName] = editedJSON
             json.dump(fullJSON, finalJSONFile)
-            finalJSONFile = open(str(tableName) + str(fileTracker) + ".json", "w+")
+            finalJSONFile = open(str(tableName) + str(fileTracker) + '.json', 'w+')
             fileTracker = fileTracker + 1
             editedJSON = []
             i = 1
@@ -27,13 +27,13 @@ def createPutRequestFiles(dataDirectory, tableName):
 def addTypestrings(cjson):
     for field in cjson:
         if 'str' in str(type(cjson[field])):
-            cjson[field] = {"S": str(cjson[field])}
+            cjson[field] = {'S': str(cjson[field])}
         elif 'int' in str(type(cjson[field])) or 'float' in str(type(cjson[field])):
-            cjson[field] = {"N": str(cjson[field])}
+            cjson[field] = {'N': str(cjson[field])}
         else:
-            print("missing something HANNAH")
-    item = {"PutRequest": {"Item": ""}}
-    item["PutRequest"]["Item"] = cjson
+            print('missing something HANNAH')
+    item = {'PutRequest': {'Item': ''}}
+    item['PutRequest']['Item'] = cjson
     return item
 
 
@@ -49,6 +49,6 @@ def collectTypes(folderDir):
     print(possibleTypes)
 
 
-if __name__ == "__main__":
-    createPutRequestFiles("data/", "runnerTry")
+if __name__ == '__main__':
+    createPutRequestFiles('data/', 'workouts')
 

@@ -1,12 +1,29 @@
 from datetime import datetime, timedelta
 from decimal import Decimal
+from math import trunc
 
 
-def increment_by_one(num):
-    return num + 1
+def greaterThanNkmStreaks(userRunningData, requiredDistance, requiredStreakLengthDays):
+    numDaysInCurrentStreak = 1
+    streaksLengths = []
+
+    for workout in userRunningData:
+        workout['start'] = datetime.strptime(workout['start'][:10], '%Y-%m-%d')
+    NkmRuns = list(filter(lambda x: 'distance' in x and x['distance'] >= requiredDistance, userRunningData))
+    datesOfNkRuns = sorted({run['start'] for run in NkmRuns})  # had to do this in 2 steps to avoid key error
+
+    # compare each with the next item
+    for i in range(len(datesOfNkRuns)-1):
+        if datesOfNkRuns[i] + timedelta(1) == datesOfNkRuns[i+1]:  # if the next element falls consecutively after the current,
+            numDaysInCurrentStreak = numDaysInCurrentStreak + 1
+        else:
+            streaksLengths.append(numDaysInCurrentStreak)
+            numDaysInCurrentStreak = 1
+
+    return sum([trunc(streakLen/requiredStreakLengthDays) for streakLen in streaksLengths])
 
 
-def ranMoreThan10km(userRunningData):
+def ranMoreThanNkm(userRunningData, distance):
 
     numOfWeeksRanMoreThan10km = 0
 
@@ -21,18 +38,24 @@ def ranMoreThan10km(userRunningData):
     # total distance for each week. If it's greater than or equal to 10, add to tally
     for weekStart in weeksStarting:
         workoutsThisWeek = list(filter(lambda x: x['start'] == weekStart, userRunningData))
-        sumOfDistanceInWeek = sum([thisWorkout['distance'] for thisWorkout in workoutsThisWeek])
-        if sumOfDistanceInWeek >= 10:
+        sumOfDistanceInWeek = sum([thisWorkout['distance'] for thisWorkout in workoutsThisWeek if 'distance' in thisWorkout])
+        if sumOfDistanceInWeek >= distance:
             numOfWeeksRanMoreThan10km = numOfWeeksRanMoreThan10km + 1
 
     return numOfWeeksRanMoreThan10km
 
 
-def pr5ks(userRunningData):
+def prNks(userRunningData, distance):  # section more out, like getting x amount of time's PR pace for X distance.
+    # get last year's max pace for runs over distanceKm
+    # get this year's runs that were over distanceKm
+    # group everything by month
+    # get the max for each month
+    # sort by date
+    # loop through and count the times they PR'd by pace
     return ''
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     response = [{'user_id': 'd77908482ed2505ebbf17ef72be2f080', 'distance': Decimal('4.478512443021909'),
                  'ascent': Decimal('81.33643397688866'), 'descent': Decimal('80.4417839050293'),
                  'calories': Decimal('60.935'), 'pace': Decimal('13.360429553618925'), 'steps': Decimal('6388'),
@@ -68,7 +91,7 @@ if __name__ == "__main__":
                  'calories': Decimal('193.358'), 'pace': Decimal('12.439285023862777'), 'steps': Decimal('3543'),
                  'end': '2018-03-23T01:56:41.207000Z', 'speed': Decimal('4.823428346958816'),
                  'start': '2018-03-23T01:26:12Z', 'activity_id': '4f831a24d1d65155a6748b33ad0118d1', 'type': 'run'}]
-    print(ranMoreThan10km(response))
+    print(ranMoreThanNkm(response))
 
 
 # Units: line55
