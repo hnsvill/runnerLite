@@ -35,5 +35,11 @@ class test_greaterThanNkmStreaks(unittest.TestCase):
         self.assertEqual(greaterThanNkmStreaks('40d7ae29e393582abdbcb8c726249e22', 1, 3), 0)
 
 
+class UserData:
+
+    def returnSampleData(self):
+        print('something')
+
+
 if __name__ == '__main__':
     unittest.main()

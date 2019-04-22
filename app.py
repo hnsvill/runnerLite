@@ -1,13 +1,25 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from dataAccess import *
 import workoutCalculations
 
-app = Flask(__name__)
+import os
+
+app = Flask(__name__, static_url_path='/static')
+
+
+@app.route('/')
+def testlinks():
+    return app.send_static_file('homepage.html')
 
 
 @app.route('/allUserData/<userID>')
 def allUserData(userID):
     return str(getUserWorkouts(userID))
+
+
+@app.route('/allUserRuns/<userID>')
+def allUserRuns(userID):
+    return str(getUserWorkouts(userID, 'run'))
 
 
 @app.route('/addWorkout/<workoutData>')  # TODO: add a workout, recalculate, update table
@@ -36,7 +48,9 @@ def ran_more_than_10km(userID):
 
 @app.route('/pr5ks/<userID>')  # TODO: Calculation
 def pr_5ks(userID):
-    return '{user_id: ' + userID + ', ran_more_than_10km: ' + str('') + '}'
+    data = getUserWorkouts(userID, 'run')
+    timesPRThisYear = workoutCalculations.prNks(data, 5, 2018)
+    return '{user_id: ' + userID + ', ran_more_than_10km: ' + str(timesPRThisYear) + '}'
 
 
 if __name__ == '__main__':
