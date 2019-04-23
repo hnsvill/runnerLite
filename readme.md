@@ -1,19 +1,19 @@
-## Description:
-These algorithms have been written to analyze the JSON data provided in this repo.
-
+## RunnerLite:
+This api has been written to use Flask with DynamoDB and the intention to deploy on an EC2 instance.
 
 ### To Run:
-Clone this repo, call each calculation by name. The three names are pr5ks, moreThan10km, and greaterThan3kmStreak.
+Clone this repo. In the project's directory, run the following commands:
+- `pip3 install boto3`
+- `pip3 install Flask`
+- `python3 app.py`
 
-Example: "python3 pr5ks.py"
+The server will spin up on port 5000. The index has links to the endpoints for each calculation for
+each user and important links.
 
-The 6 users with data in this set have the following IDs*:
-    '6bd5f3c04e6b5279aca633c2a245dd9c',
-    '4e7aaa167b9b5ff7b9b3a22dee8c2085',
-    'c7e962db02da55209f02fe3d8a86c99d',
-    'd77908482ed2505ebbf17ef72be2f080',
-    '72eff89c74cc57178e02f103187ad579',
-    '40d7ae29e393582abdbcb8c726249e22'
+Access these calculations from the command line
 
-### Future of this repo:
-I am currently in the process of turning this into a Django application. The database will be PostgrSQL, and I intend to add an API using the Django REST framework. Progress can be found at github.com/hnsvill/runnerLite
+
+### More Information:
+Additional information about this project can be found in the "submissionExplanation.pdf" file. It 
+is located at [static/submissionExplanation.pdf](https://github.com/hnsvill/runnerLite/blob/master/static/submissionExplanation.pdf), 
+also linked on the index page of the app.

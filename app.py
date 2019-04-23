@@ -1,10 +1,10 @@
-from flask import Flask, send_from_directory
-from dataAccess import *
+from flask import Flask
 import workoutCalculations
-
-import os
+from dataAccess import *
 
 app = Flask(__name__, static_url_path='/static')
+
+localOrRemoteData = 'local'
 
 
 @app.route('/')
@@ -22,7 +22,7 @@ def allUserRuns(userID):
     return str(getUserWorkouts(userID, 'run'))
 
 
-@app.route('/addWorkout/<workoutData>')  # TODO: add a workout, recalculate, update table
+@app.route('/addWorkout/<workoutData>')  # TODO: add a workout, recalculate KPI's, update table
 def add_workout_to_db(workoutData):
     return 'Added ' + workoutData + ' to DB'
 
@@ -34,23 +34,23 @@ def full_dashboard(userID):
 
 @app.route('/greaterThan3kmStreaks/<userID>')
 def greater_than_3km_streaks(userID):
-    data = getUserWorkouts(userID, 'run')
+    data = getUserWorkouts(userID, 'run', localOrRemoteData)
     numStreaks = workoutCalculations.greaterThanNkmStreaks(data, 1, 3)
     return '{user_id: ' + userID + ', greater_than_3km_streaks: ' + str(numStreaks) + '}'
 
 
 @app.route('/ranMoreThan10km/<userID>')
 def ran_more_than_10km(userID):
-    data = getUserWorkouts(userID, 'run')
+    data = getUserWorkouts(userID, 'run', localOrRemoteData)
     timesMoreThan10kmInWeek = workoutCalculations.ranMoreThanNkm(data, 10)
     return '{user_id: ' + userID + ', ran_more_than_10km: ' + str(timesMoreThan10kmInWeek) + '}'
 
 
-@app.route('/pr5ks/<userID>')  # TODO: Calculation
+@app.route('/pr5ks/<userID>')
 def pr_5ks(userID):
-    data = getUserWorkouts(userID, 'run')
+    data = getUserWorkouts(userID, 'run', localOrRemoteData)
     timesPRThisYear = workoutCalculations.prNks(data, 5, 2018)
-    return '{user_id: ' + userID + ', ran_more_than_10km: ' + str(timesPRThisYear) + '}'
+    return '{user_id: ' + userID + ', pace_5k_pr: ' + str(timesPRThisYear) + '}'
 
 
 if __name__ == '__main__':
