@@ -3,14 +3,16 @@ from boto3.dynamodb.conditions import Key
 from decimal import Decimal
 import json
 
-dynamodb = boto3.resource('dynamodb')
-workoutsTbl = dynamodb.Table('workouts')
-kpis = dynamodb.Table('metrics')
+
 
 
 # DynamoDB data access
 def getUserWorkouts(userID, activityType = 'allTypes', localOrRemote = 'local'):
     if localOrRemote == 'remote':
+        dynamodb = boto3.resource('dynamodb')
+        workoutsTbl = dynamodb.Table('workouts')
+        kpis = dynamodb.Table('metrics')
+        
         response = workoutsTbl.query(
             KeyConditionExpression=Key('user_id').eq(userID)
         )
