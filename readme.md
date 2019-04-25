@@ -2,18 +2,28 @@
 This api has been written to use Flask with DynamoDB and the intention to deploy on an EC2 instance.
 
 ### To Run:
-Clone this repo. In the project's directory, run the following commands:
+Make sure you have python3 and git lfs installed.
+- `brew install python3`
+- `brew install git-lfs`
+
+Clone this repo and run
+- `git lfs install`
+
+Git should allow you to finish cloning. The lfs installation is for the submissionExplanation.pdf file.
+See [the docs](https://git-lfs.github.com) for more information about git lfs.
+
+In the project's directory, run the following commands:
 - `pip3 install boto3`
 - `pip3 install Flask`
 
-#### To run using the API:
+#### Starting the runnerLite API:
 Run the following command:
 - `python3 app.py`
 
 The server will spin up on port 5000. The index has links to the endpoints for each calculation for
 each user and important links.
 
-#### To run from the command line:
+#### Using the runnerLite CLI:
 Run the following commands:
 - `python3 runnerLiteCLI.py --help` lists all of the options for the kpi you would like to calculate
 - `python3 runnerLiteCLI.py <kpiName> <userID> <optional: --datasource>`

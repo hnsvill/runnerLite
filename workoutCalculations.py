@@ -68,7 +68,7 @@ def prNks(userRunningData, distance, yearOf):
     fastest = maxPaceFromLastYear
     thisYearsPRs = 0
     for currentMonthMaxPace in thisYearsRunsMaxPacesByMonth:
-        if currentMonthMaxPace > fastest:
+        if thisYearsRunsMaxPacesByMonth[currentMonthMaxPace] > fastest:
             fastest = currentMonthMaxPace
             thisYearsPRs = thisYearsPRs + 1
 

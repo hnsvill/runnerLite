@@ -65,25 +65,25 @@ class workoutCalculations_moreThanNkm(unittest.TestCase):
 class workoutCalculations_prNks(unittest.TestCase):
 
     def test_prNks_forUser_6bd5f3c04e6b5279aca633c2a245dd9c(self):
-        self.assertEqual(prNks(testValues('6bd5f3c04e6b5279aca633c2a245dd9c'), 5, 2018), 6)
+        self.assertEqual(prNks(testValues('6bd5f3c04e6b5279aca633c2a245dd9c'), 5, 2018), 3)
 
     def test_prNks_forUser_4e7aaa167b9b5ff7b9b3a22dee8c2085(self):
-        self.assertEqual(prNks(testValues('4e7aaa167b9b5ff7b9b3a22dee8c2085'), 5, 2018), 12)
+        self.assertEqual(prNks(testValues('4e7aaa167b9b5ff7b9b3a22dee8c2085'), 5, 2018), 1)
 
     def test_prNks_forUser_c7e962db02da55209f02fe3d8a86c99d(self):
-        self.assertEqual(prNks(testValues('c7e962db02da55209f02fe3d8a86c99d'), 5, 2018), 6)
+        self.assertEqual(prNks(testValues('c7e962db02da55209f02fe3d8a86c99d'), 5, 2018), 1)
 
     def test_prNks_forUser_d77908482ed2505ebbf17ef72be2f080(self):
-        self.assertEqual(prNks(testValues('d77908482ed2505ebbf17ef72be2f080'), 5, 2018), 12)
+        self.assertEqual(prNks(testValues('d77908482ed2505ebbf17ef72be2f080'), 5, 2018), 3)
 
     def test_prNks_forUser_72eff89c74cc57178e02f103187ad579(self):
-        self.assertEqual(prNks(testValues('72eff89c74cc57178e02f103187ad579'), 5, 2018), 12)
+        self.assertEqual(prNks(testValues('72eff89c74cc57178e02f103187ad579'), 5, 2018), 4)
 
     def test_prNks_forUser_40d7ae29e393582abdbcb8c726249e22(self):
-        self.assertEqual(prNks(testValues('40d7ae29e393582abdbcb8c726249e22'), 5, 2018), 12)
+        self.assertEqual(prNks(testValues('40d7ae29e393582abdbcb8c726249e22'), 5, 2018), 1)
         
     def test_prNks_forUser_forEmptyList(self):
-        self.assertEqual(prNks([], 5, 2018), 12)
+        self.assertEqual(prNks([], 5, 2018), 0)
 
 
 if __name__ == '__main__':
