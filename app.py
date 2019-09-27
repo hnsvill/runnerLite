@@ -32,11 +32,17 @@ def full_dashboard(userID):
     return '{user_id: ' + userID + '}'
 
 
-@app.route('/greaterThan3kmStreaks/<userID>')
-def greater_than_3km_streaks(userID):
+@app.route('/greaterThan3kmStreaks/<userID>/<requiredDistance>')
+def greater_than_3km_streaks(userID, requiredDistance):
     data = getUserWorkouts(userID, 'run', localOrRemoteData)
-    numStreaks = workoutCalculations.greaterThanNkmStreaks(data, 1, 3)
+    numStreaks = workoutCalculations.greaterThanNkmStreaks(data, int(requiredDistance), 3)
     return '{user_id: ' + userID + ', greater_than_3km_streaks: ' + str(numStreaks) + '}'
+
+# @app.route('/greaterThan1kmStreaks/<userID>')
+# def greater_than_1km_streaks(userID):
+#     data = getUserWorkouts(userID, 'run', localOrRemoteData)
+#     numStreaks = workoutCalculations.greaterThanNkmStreaks(data, 1, 3)
+#     return '{user_id: ' + userID + ', greater_than_3km_streaks: ' + str(numStreaks) + '}'
 
 
 @app.route('/ranMoreThan10km/<userID>')
